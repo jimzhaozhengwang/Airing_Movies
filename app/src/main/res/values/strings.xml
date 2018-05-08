@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CodepathAndroidFlicks</string>
+    <string name="title">Flicks</string>
+    <string name="results">results</string>
 </resources>
