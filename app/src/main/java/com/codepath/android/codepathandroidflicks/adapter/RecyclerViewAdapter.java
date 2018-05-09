@@ -51,8 +51,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         Picasso.get()
                 .load(imagePath)
-                .placeholder(R.mipmap.ic_launcher)
-                .error(R.mipmap.ic_launcher)
+                .placeholder(R.drawable.ic_file_download_black_200dp)
+                .error(R.drawable.ic_file_download_black_200dp)
                 .into(holder.image);
 
 //        holder.image.setImageResource;
