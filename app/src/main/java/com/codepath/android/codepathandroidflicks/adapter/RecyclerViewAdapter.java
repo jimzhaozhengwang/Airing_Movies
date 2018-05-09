@@ -1,6 +1,8 @@
 package com.codepath.android.codepathandroidflicks.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,8 +41,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.title.setText(current.getTitle());
         holder.overview.setText(current.getOverview());
 
+        String imagePath = "";
+        int orientation = context.getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            imagePath = BASE_URL + current.getPoster_path();
+        } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            imagePath = BASE_URL + current.getBackdrop_path();
+        }
+
         Picasso.get()
-                .load(BASE_URL + current.getPoster_path())
+                .load(imagePath)
                 .placeholder(R.mipmap.ic_launcher)
                 .error(R.mipmap.ic_launcher)
                 .into(holder.image);

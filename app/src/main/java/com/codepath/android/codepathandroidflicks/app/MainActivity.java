@@ -2,6 +2,7 @@ package com.codepath.android.codepathandroidflicks.app;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -71,19 +72,17 @@ public class MainActivity extends AppCompatActivity {
 
                                 mLayoutManager = new LinearLayoutManager(MainActivity.this);
                                 mRecyclerView.setLayoutManager(mLayoutManager);
+                                mRecyclerView.addItemDecoration(new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
                                 mAdapter = new RecyclerViewAdapter(MainActivity.this, movieList);
                                 mRecyclerView.setAdapter(mAdapter);
-
                             } catch (IOException e) {
                                 e.printStackTrace();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
                         }
                     });
-
                 }
             }
         });
