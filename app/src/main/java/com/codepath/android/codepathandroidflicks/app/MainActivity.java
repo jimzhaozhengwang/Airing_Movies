@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.codepath.android.codepathandroidflicks.R;
 import com.codepath.android.codepathandroidflicks.adapter.RecyclerViewAdapter;
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     final String API_KEY = "47da6cf417ae9a89d8888c3a8da389d0";
-    private List<Movie> movieList;
+    private List<Movie> mMovieList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                                 JSONObject jsonObject = new JSONObject(jsonData);
                                 JSONArray resultsArray = jsonObject.getJSONArray("results");
                                 Gson gson = new GsonBuilder().create();
-                                 movieList = Arrays.asList(gson.fromJson(resultsArray.toString(),
+                                mMovieList = Arrays.asList(gson.fromJson(resultsArray.toString(),
                                                             Movie[].class));
 
                                 mRecyclerView = findViewById(R.id.recyclerView);
@@ -74,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                                 mRecyclerView.setLayoutManager(mLayoutManager);
                                 mRecyclerView.addItemDecoration(new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
-                                mAdapter = new RecyclerViewAdapter(MainActivity.this, movieList);
+                                mAdapter = new RecyclerViewAdapter(MainActivity.this, mMovieList);
                                 mRecyclerView.setAdapter(mAdapter);
                             } catch (IOException e) {
                                 e.printStackTrace();
