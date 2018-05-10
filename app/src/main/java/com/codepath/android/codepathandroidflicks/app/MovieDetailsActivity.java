@@ -35,7 +35,6 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
     private RatingBar mRatingBar;
     private TextView mOverview;
     private List<Video> mVideoList;
-    private YouTubePlayer mYoutubePlayer;
     private YouTubePlayerView mYouTubePlayerView;
     private Movie mMovie;
 
@@ -45,8 +44,7 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
         mYouTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                mYoutubePlayer = youTubePlayer;
-                mYoutubePlayer.cueVideo(url);
+                youTubePlayer.cueVideo(url);
             }
             @Override
             public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {

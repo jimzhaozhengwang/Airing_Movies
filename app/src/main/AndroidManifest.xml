@@ -18,9 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".app.MovieDetailsActivity"
-            android:configChanges="orientation|screenSize"
-            />
+        <activity
+            android:name=".app.MovieDetailsActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name=".app.PopularMoviePlaybackActivity"
+            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>
