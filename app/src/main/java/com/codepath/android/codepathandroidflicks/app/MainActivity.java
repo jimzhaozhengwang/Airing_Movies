@@ -1,7 +1,6 @@
 package com.codepath.android.codepathandroidflicks.app;
 
 import android.os.Parcelable;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -34,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     final String API_KEY = "47da6cf417ae9a89d8888c3a8da389d0";
+    final String PARCELABLE_KEY = "recyclerView";
     private List<Movie> mMovieList;
 
     @Override
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                                 mRecyclerView.setAdapter(mAdapter);
 
                                 if (savedInstanceState != null) {
-                                    Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable("recyclerView");
+                                    Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(PARCELABLE_KEY);
                                     mRecyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
                                 }
                             } catch (IOException e) {
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (mRecyclerView != null && mRecyclerView.getLayoutManager() != null && mRecyclerView.getLayoutManager().onSaveInstanceState() != null) {
-            outState.putParcelable("recyclerView", mRecyclerView.getLayoutManager().onSaveInstanceState());
+            outState.putParcelable(PARCELABLE_KEY, mRecyclerView.getLayoutManager().onSaveInstanceState());
         }
     }
 }
