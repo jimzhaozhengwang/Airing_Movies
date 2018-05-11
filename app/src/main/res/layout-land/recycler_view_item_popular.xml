@@ -7,8 +7,6 @@
     android:focusable="true"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-
     <ImageView
         android:id="@+id/popular_image"
         android:layout_width="match_parent"
