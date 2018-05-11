@@ -1,5 +1,7 @@
 package com.codepath.android.codepathandroidflicks.app;
 
+import android.os.Parcelable;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -35,10 +37,12 @@ public class MainActivity extends AppCompatActivity {
     private List<Movie> mMovieList;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.setTitle(R.string.title);
+
+        mRecyclerView = findViewById(R.id.recyclerView);
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
@@ -65,9 +69,8 @@ public class MainActivity extends AppCompatActivity {
                                 JSONArray resultsArray = jsonObject.getJSONArray("results");
                                 Gson gson = new GsonBuilder().create();
                                 mMovieList = Arrays.asList(gson.fromJson(resultsArray.toString(),
-                                                            Movie[].class));
+                                        Movie[].class));
 
-                                mRecyclerView = findViewById(R.id.recyclerView);
 
                                 mLayoutManager = new LinearLayoutManager(MainActivity.this);
                                 mRecyclerView.setLayoutManager(mLayoutManager);
@@ -75,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
 
                                 mAdapter = new RecyclerViewAdapter(MainActivity.this, mMovieList);
                                 mRecyclerView.setAdapter(mAdapter);
+
+                                if (savedInstanceState != null) {
+                                    Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable("recyclerView");
+                                    mRecyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
+                                }
                             } catch (IOException e) {
                                 e.printStackTrace();
                             } catch (JSONException e) {
@@ -85,6 +93,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mRecyclerView != null && mRecyclerView.getLayoutManager() != null && mRecyclerView.getLayoutManager().onSaveInstanceState() != null) {
+            outState.putParcelable("recyclerView", mRecyclerView.getLayoutManager().onSaveInstanceState());
+        }
     }
 }
 
