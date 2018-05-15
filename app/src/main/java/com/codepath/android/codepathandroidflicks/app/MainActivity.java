@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    final String API_KEY = "47da6cf417ae9a89d8888c3a8da389d0";
-    final String PARCELABLE_KEY = "recyclerView";
     private List<Movie> mMovieList;
 
     @Override
@@ -46,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("https://api.themoviedb.org/3/movie/now_playing?api_key=" + API_KEY)
+                .url("https://api.themoviedb.org/3/movie/now_playing?api_key=" + getString(R.string.The_Movie_DB_API_key))
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -66,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                             try {
                                 String jsonData = response.body().string();
                                 JSONObject jsonObject = new JSONObject(jsonData);
-                                JSONArray resultsArray = jsonObject.getJSONArray("results");
+                                JSONArray resultsArray = jsonObject.getJSONArray(getString(R.string.results));
                                 Gson gson = new GsonBuilder().create();
                                 mMovieList = Arrays.asList(gson.fromJson(resultsArray.toString(),
                                         Movie[].class));
@@ -80,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                                 mRecyclerView.setAdapter(mAdapter);
 
                                 if (savedInstanceState != null) {
-                                    Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(PARCELABLE_KEY);
+                                    Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(getString(R.string.parcelable_key));
                                     mRecyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
                                 }
                             } catch (IOException e) {
@@ -99,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (mRecyclerView != null && mRecyclerView.getLayoutManager() != null && mRecyclerView.getLayoutManager().onSaveInstanceState() != null) {
-            outState.putParcelable(PARCELABLE_KEY, mRecyclerView.getLayoutManager().onSaveInstanceState());
+            outState.putParcelable(getString(R.string.parcelable_key), mRecyclerView.getLayoutManager().onSaveInstanceState());
         }
     }
 }

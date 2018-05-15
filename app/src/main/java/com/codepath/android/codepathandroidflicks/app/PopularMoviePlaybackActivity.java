@@ -14,9 +14,8 @@ public class PopularMoviePlaybackActivity extends YouTubeBaseActivity {
     private YouTubePlayerView mYouTubePlayerView;
 
     private void initializeYouTube(final String url){
-        final String YOUTUBE_API_KEY = "AIzaSyAhtEqjxokaB9ILyZjOMumKo0MqeJa5ovs";
 
-        mYouTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
+        mYouTubePlayerView.initialize(getString(R.string.YouTube_API_key), new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 youTubePlayer.cueVideo(url);
@@ -37,7 +36,7 @@ public class PopularMoviePlaybackActivity extends YouTubeBaseActivity {
 
         mYouTubePlayerView = findViewById(R.id.video);
 
-        String url = getIntent().getStringExtra("url");
+        String url = getIntent().getStringExtra(getString(R.string.url));
 
         initializeYouTube(url);
     }

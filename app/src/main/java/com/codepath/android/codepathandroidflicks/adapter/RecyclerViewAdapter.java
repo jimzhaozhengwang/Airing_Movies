@@ -69,7 +69,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (holder.getItemViewType() == POPULAR) {
             final String BASE_URL = "https://image.tmdb.org/t/p/original/";
             final PopularViewHolder popularViewHolder = (PopularViewHolder) holder;
-            String imagePath = BASE_URL + current.getBackdrop_path();
+            String imagePath = BASE_URL + current.getBackdropPath();
             Picasso.get()
                     .load(imagePath)
                     .fit()
@@ -83,11 +83,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             popularViewHolder.recyclerViewItem.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    final String THE_MOVIE_DB_API_KEY = "47da6cf417ae9a89d8888c3a8da389d0";
 
                                     OkHttpClient client = new OkHttpClient();
                                     Request request = new Request.Builder()
-                                            .url("https://api.themoviedb.org/3/movie/" + current.getId() + "/videos?api_key=" + THE_MOVIE_DB_API_KEY + "&language=en-US")
+                                            .url("https://api.themoviedb.org/3/movie/" + current.getId() + "/videos?api_key=" + mContext.getString(R.string.The_Movie_DB_API_key) + "&language=en-US")
                                             .build();
 
                                     client.newCall(request).enqueue(new Callback() {
@@ -103,7 +102,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                                                 try {
                                                     String jsonData = response.body().string();
                                                     JSONObject jsonObject = new JSONObject(jsonData);
-                                                    JSONArray resultsArray = jsonObject.getJSONArray("results");
+                                                    JSONArray resultsArray = jsonObject.getJSONArray(mContext.getString(R.string.results));
                                                     Gson gson = new GsonBuilder().create();
                                                     mVideoList = Arrays.asList(gson.fromJson(resultsArray.toString(),
                                                             Video[].class));
@@ -111,18 +110,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                                                     // find the first valid trailer
                                                     for (int c = 0; c < mVideoList.size(); c++) {
                                                         final Video current = mVideoList.get(c);
-                                                        if (current.getSite().equals(mContext.getString(R.string.YouTube)) &&
-                                                                current.getType().equals(mContext.getString(R.string.Trailer))) {
+                                                        if (mContext.getString(R.string.YouTube).equals(current.getSite()) &&
+                                                                mContext.getString(R.string.Trailer).equals(current.getType())) {
 
                                                             Intent intent = new Intent(mContext, PopularMoviePlaybackActivity.class);
-                                                            intent.putExtra("url", current.getKey());
+                                                            intent.putExtra(mContext.getString(R.string.url), current.getKey());
                                                             mContext.startActivity(intent);
                                                             break;
                                                         }
                                                     }
-                                                } catch (IOException e) {
-                                                    e.printStackTrace();
-                                                } catch (JSONException e) {
+                                                } catch (IOException | NullPointerException | JSONException e) {
                                                     e.printStackTrace();
                                                 }
                                             }
@@ -137,8 +134,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                         }
                     });
-
-
         } else {
             final String BASE_URL = "https://image.tmdb.org/t/p/w500/";
             final StandardViewHolder standardViewHolder = (StandardViewHolder) holder;
@@ -148,9 +143,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             String imagePath = "";
             int orientation = mContext.getResources().getConfiguration().orientation;
             if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                imagePath = BASE_URL + current.getPoster_path();
+                imagePath = BASE_URL + current.getPosterPath();
             } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                imagePath = BASE_URL + current.getBackdrop_path();
+                imagePath = BASE_URL + current.getBackdropPath();
             }
 
             Picasso.get()
@@ -165,7 +160,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                                 public void onClick(View v) {
                                     Gson gson = new Gson();
                                     Intent intent = new Intent(mContext, MovieDetailsActivity.class);
-                                    intent.putExtra("movieObject", gson.toJson(current));
+                                    intent.putExtra(mContext.getString(R.string.movieObject), gson.toJson(current));
                                     mContext.startActivity(intent);
                                 }
                             });
@@ -186,7 +181,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemViewType(int position) {
-        if (mDataList.get(position).getVote_average() >= 7.0) {
+        if (mDataList.get(position).getVoteAverage() >= 7.0) {
             return POPULAR;
         }
         return STANDARD;

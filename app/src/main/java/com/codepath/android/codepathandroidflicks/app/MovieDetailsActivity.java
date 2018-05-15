@@ -39,9 +39,7 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
     private Movie mMovie;
 
     private void initializeYouTube(final String url){
-        final String YOUTUBE_API_KEY = "AIzaSyAhtEqjxokaB9ILyZjOMumKo0MqeJa5ovs";
-
-        mYouTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
+        mYouTubePlayerView.initialize(getString(R.string.YouTube_API_key), new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 youTubePlayer.cueVideo(url);
@@ -59,7 +57,7 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
         setContentView(R.layout.activity_movie_details);
         this.setTitle(R.string.app_name);
         Gson gson = new Gson();
-        String strObj = getIntent().getStringExtra("movieObject");
+        String strObj = getIntent().getStringExtra(getString(R.string.movieObject));
         mMovie = gson.fromJson(strObj, Movie.class);
 
         mYouTubePlayerView = findViewById(R.id.video);
@@ -73,11 +71,9 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
     protected void onResume() {
         super.onResume();
 
-        final String THE_MOVIE_DB_API_KEY = "47da6cf417ae9a89d8888c3a8da389d0";
-
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("https://api.themoviedb.org/3/movie/" + mMovie.getId() + "/videos?api_key=" + THE_MOVIE_DB_API_KEY + "&language=en-US")
+                .url("https://api.themoviedb.org/3/movie/" + mMovie.getId() + "/videos?api_key=" + getString(R.string.The_Movie_DB_API_key) + "&language=en-US")
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -97,7 +93,7 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
                             try {
                                 String jsonData = response.body().string();
                                 JSONObject jsonObject = new JSONObject(jsonData);
-                                JSONArray resultsArray = jsonObject.getJSONArray("results");
+                                JSONArray resultsArray = jsonObject.getJSONArray(getString(R.string.results));
                                 Gson gson = new GsonBuilder().create();
                                 mVideoList = Arrays.asList(gson.fromJson(resultsArray.toString(),
                                         Video[].class));
@@ -105,8 +101,8 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
                                 // find the first valid trailer
                                 for (int c = 0; c < mVideoList.size(); c++){
                                     final Video current = mVideoList.get(c);
-                                    if (current.getSite().equals(getString(R.string.YouTube)) &&
-                                            current.getType().equals(getString(R.string.Trailer))){
+                                    if (getString(R.string.YouTube).equals(current.getSite()) &&
+                                            getString(R.string.Trailer).equals(current.getType())){
 
                                         initializeYouTube(current.getKey());
                                         break;
@@ -125,10 +121,10 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
 
         mTitle.setText(mMovie.getTitle());
 
-        mReleaseDate.setText(mMovie.getRelease_date());
+        mReleaseDate.setText(mMovie.getReleaseDate());
 
         // vote_average has a maximum value of 10, the maximum number of stars is 5
-        mRatingBar.setRating((int) Math.round(mMovie.getVote_average()/2));
+        mRatingBar.setRating((int) Math.round(mMovie.getVoteAverage()/2));
 
         mOverview.setText(mMovie.getOverview());
     }

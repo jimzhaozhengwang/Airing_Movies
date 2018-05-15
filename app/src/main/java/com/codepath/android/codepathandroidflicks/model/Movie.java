@@ -7,13 +7,13 @@ import java.util.List;
 public class Movie {
 
     @SerializedName("vote_count")
-    int vote_count;
+    int voteCount;
 
     @SerializedName("id")
     int id;
 
     @SerializedName("vote_average")
-    double vote_average;
+    double voteAverage;
 
     @SerializedName("title")
     String title;
@@ -22,19 +22,19 @@ public class Movie {
     double popularity;
 
     @SerializedName("poster_path")
-    String poster_path;
+    String posterPath;
 
     @SerializedName("original_language")
-    String original_language;
+    String originalLanguage;
 
     @SerializedName("original_title")
-    String original_title;
+    String originalTitle;
 
     @SerializedName("genre_id")
-    List<Integer> genre_ids;
+    List<Integer> genreIds;
 
     @SerializedName("backdrop_path")
-    String backdrop_path;
+    String backdropPath;
 
     @SerializedName("adult")
     boolean adult;
@@ -43,22 +43,22 @@ public class Movie {
     String overview;
 
     @SerializedName("release_date")
-    String release_date;
+    String releaseDate;
 
     public Movie(){
 
     }
 
-    public int getVote_count() {
-        return vote_count;
+    public int getVoteCount() {
+        return voteCount;
     }
 
     public int getId() {
         return id;
     }
 
-    public double getVote_average() {
-        return vote_average;
+    public double getVoteAverage() {
+        return voteAverage;
     }
 
     public String getTitle() {
@@ -69,24 +69,24 @@ public class Movie {
         return popularity;
     }
 
-    public String getPoster_path() {
-        return poster_path;
+    public String getPosterPath() {
+        return posterPath;
     }
 
-    public String getOriginal_language() {
-        return original_language;
+    public String getOriginalLanguage() {
+        return originalLanguage;
     }
 
-    public String getOriginal_title() {
-        return original_title;
+    public String getOriginalTitle() {
+        return originalTitle;
     }
 
-    public List<Integer> getGenre_ids() {
-        return genre_ids;
+    public List<Integer> getGenreIds() {
+        return genreIds;
     }
 
-    public String getBackdrop_path() {
-        return backdrop_path;
+    public String getBackdropPath() {
+        return backdropPath;
     }
 
     public boolean isAdult() {
@@ -97,7 +97,7 @@ public class Movie {
         return overview;
     }
 
-    public String getRelease_date() {
-        return release_date;
+    public String getReleaseDate() {
+        return releaseDate;
     }
 }

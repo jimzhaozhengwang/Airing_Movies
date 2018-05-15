@@ -3,4 +3,10 @@
     <string name="title">Flicks</string>
     <string name="YouTube">YouTube</string>
     <string name="Trailer">Trailer</string>
+    <string name="YouTube_API_key">AIzaSyAhtEqjxokaB9ILyZjOMumKo0MqeJa5ovs</string>
+    <string name="url">url</string>
+    <string name="The_Movie_DB_API_key">47da6cf417ae9a89d8888c3a8da389d0</string>
+    <string name="movieObject">movieObject</string>
+    <string name="results">results</string>
+    <string name="parcelable_key">recyclerView</string>
 </resources>
