@@ -47,9 +47,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private final int POPULAR = 1;
 
     public RecyclerViewAdapter(Context context, List<Movie> data) {
-        this.mContext = context;
+        mContext = context;
         mInflater = LayoutInflater.from(context);
-        this.mDataList = data;
+        mDataList = data;
     }
 
     @Override

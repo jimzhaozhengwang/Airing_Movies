@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -38,6 +40,12 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
     private YouTubePlayerView mYouTubePlayerView;
     private Movie mMovie;
 
+    @Inject
+    Gson mGson;
+
+    @Inject
+    OkHttpClient mOkHttpClient;
+
     private void initializeYouTube(final String url){
         mYouTubePlayerView.initialize(getString(R.string.YouTube_API_key), new YouTubePlayer.OnInitializedListener() {
             @Override
@@ -53,12 +61,13 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        MyApp.getmNetComponent().inject(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
         this.setTitle(R.string.app_name);
-        Gson gson = new Gson();
         String strObj = getIntent().getStringExtra(getString(R.string.movieObject));
-        mMovie = gson.fromJson(strObj, Movie.class);
+        mMovie = mGson.fromJson(strObj, Movie.class);
 
         mYouTubePlayerView = findViewById(R.id.video);
         mTitle = findViewById(R.id.title);
@@ -70,13 +79,11 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url("https://api.themoviedb.org/3/movie/" + mMovie.getId() + "/videos?api_key=" + getString(R.string.The_Movie_DB_API_key) + "&language=en-US")
                 .build();
 
-        client.newCall(request).enqueue(new Callback() {
+        mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();

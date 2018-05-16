@@ -10,8 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import com.codepath.android.codepathandroidflicks.R;
 import com.codepath.android.codepathandroidflicks.adapter.RecyclerViewAdapter;
 import com.codepath.android.codepathandroidflicks.model.Movie;
+import com.codepath.android.codepathandroidflicks.module.NetComponent;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,6 +20,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -34,20 +36,27 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private List<Movie> mMovieList;
 
+    @Inject
+    OkHttpClient mClient;
+
+    @Inject
+    Gson mGson;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.setTitle(R.string.title);
 
+        MyApp.getmNetComponent().inject(this);
+
         mRecyclerView = findViewById(R.id.recyclerView);
 
-        OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url("https://api.themoviedb.org/3/movie/now_playing?api_key=" + getString(R.string.The_Movie_DB_API_key))
                 .build();
 
-        client.newCall(request).enqueue(new Callback() {
+        mClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
@@ -65,8 +74,7 @@ public class MainActivity extends AppCompatActivity {
                                 String jsonData = response.body().string();
                                 JSONObject jsonObject = new JSONObject(jsonData);
                                 JSONArray resultsArray = jsonObject.getJSONArray(getString(R.string.results));
-                                Gson gson = new GsonBuilder().create();
-                                mMovieList = Arrays.asList(gson.fromJson(resultsArray.toString(),
+                                mMovieList = Arrays.asList(mGson.fromJson(resultsArray.toString(),
                                         Movie[].class));
 
 
