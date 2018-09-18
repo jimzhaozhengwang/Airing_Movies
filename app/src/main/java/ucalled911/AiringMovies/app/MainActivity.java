@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         this.setTitle(R.string.title);
 
-        MyApp.getmNetComponent().inject(this);
+        MyApp.getNetComponent().inject(this);
 
         mRecyclerView = findViewById(R.id.recyclerView);
 
@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
                                 JSONArray resultsArray = jsonObject.getJSONArray(getString(R.string.results));
                                 mMovieList = Arrays.asList(mGson.fromJson(resultsArray.toString(),
                                         Movie[].class));
-
 
                                 mLayoutManager = new LinearLayoutManager(MainActivity.this);
                                 mRecyclerView.setLayoutManager(mLayoutManager);

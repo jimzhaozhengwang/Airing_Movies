@@ -60,7 +60,7 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        MyApp.getmNetComponent().inject(this);
+        MyApp.getNetComponent().inject(this);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
@@ -114,9 +114,7 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
                                         break;
                                     }
                                 }
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            } catch (JSONException e) {
+                            } catch (IOException | JSONException e) {
                                 e.printStackTrace();
                             }
                         }
@@ -130,7 +128,7 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
         mReleaseDate.setText(mMovie.getReleaseDate());
 
         // vote_average has a maximum value of 10, the maximum number of stars is 5
-        mRatingBar.setRating((int) Math.round(mMovie.getVoteAverage() / 2));
+        mRatingBar.setRating((float) (mMovie.getVoteAverage() / 2.0));
 
         mOverview.setText(mMovie.getOverview());
     }

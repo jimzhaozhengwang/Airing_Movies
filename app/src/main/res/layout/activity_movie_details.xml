@@ -6,42 +6,53 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         tools:context="ucalled911.AiringMovies.app.MovieDetailsActivity">
 
         <com.google.android.youtube.player.YouTubePlayerView
             android:id="@+id/video"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="@string/title"/> <!-- just a placeholder for xml preview -->
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/title"
+            android:textSize="18sp"
+            android:textStyle="bold" /> <!-- just a placeholder for xml preview -->
 
         <TextView
             android:id="@+id/releaseDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="@string/title" /> <!-- just a placeholder for xml preview -->
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/title"
+            android:textSize="14sp" /> <!-- just a placeholder for xml preview -->
 
         <RatingBar
             android:id="@+id/rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:max="5"
-            android:isIndicator="true"/>
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:isIndicator="true"
+            android:max="5" />
 
         <TextView
             android:id="@+id/overview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/title"/> <!-- just a placeholder for xml preview -->
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/title"
+            android:textSize="16sp" /> <!-- just a placeholder for xml preview -->
 
     </LinearLayout>
 </ScrollView>

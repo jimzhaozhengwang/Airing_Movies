@@ -10,7 +10,7 @@ import ucalled911.AiringMovies.module.NetModule;
 public class MyApp extends Application {
     private static NetComponent mNetComponent;
 
-    public static NetComponent getmNetComponent() {
+    public static NetComponent getNetComponent() {
         return mNetComponent;
     }
 
