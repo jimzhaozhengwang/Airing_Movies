@@ -1,4 +1,4 @@
-package com.codepath.android.codepathandroidflicks.adapter;
+package ucalled911.AiringMovies.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,12 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.codepath.android.codepathandroidflicks.R;
-
-import com.codepath.android.codepathandroidflicks.app.MovieDetailsActivity;
-import com.codepath.android.codepathandroidflicks.app.PopularMoviePlaybackActivity;
-import com.codepath.android.codepathandroidflicks.model.Movie;
-import com.codepath.android.codepathandroidflicks.model.Video;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
@@ -36,15 +30,20 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import ucalled911.AiringMovies.R;
+import ucalled911.AiringMovies.app.MovieDetailsActivity;
+import ucalled911.AiringMovies.app.PopularMoviePlaybackActivity;
+import ucalled911.AiringMovies.model.Movie;
+import ucalled911.AiringMovies.model.Video;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private final int STANDARD = 0;
+    private final int POPULAR = 1;
     private List<Movie> mDataList;
     private LayoutInflater mInflater;
     private Context mContext;
     private List<Video> mVideoList;
-    private final int STANDARD = 0;
-    private final int POPULAR = 1;
 
     public RecyclerViewAdapter(Context context, List<Movie> data) {
         mContext = context;
@@ -75,7 +74,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     .fit()
                     .placeholder(R.drawable.ic_file_download_black_200dp)
                     .error(R.drawable.ic_error_black_200dp)
-                    .into(popularViewHolder.movieImage, new com.squareup.picasso.Callback(){
+                    .into(popularViewHolder.movieImage, new com.squareup.picasso.Callback() {
                         @Override
                         public void onSuccess() {
                             popularViewHolder.playIcon.setVisibility(View.VISIBLE);
@@ -94,6 +93,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                                         public void onFailure(Call call, IOException e) {
                                             e.printStackTrace();
                                         }
+
                                         @Override
                                         public void onResponse(Call call, final Response response) throws IOException {
                                             if (!response.isSuccessful()) {
@@ -129,6 +129,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                                 }
                             });
                         }
+
                         @Override
                         public void onError(Exception e) {
 
@@ -152,7 +153,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     .load(imagePath)
                     .placeholder(R.drawable.ic_file_download_black_200dp)
                     .error(R.drawable.ic_error_black_200dp)
-                    .into(standardViewHolder.image, new com.squareup.picasso.Callback(){
+                    .into(standardViewHolder.image, new com.squareup.picasso.Callback() {
                         @Override
                         public void onSuccess() {
                             standardViewHolder.recyclerViewItem.setOnClickListener(new View.OnClickListener() {
@@ -216,5 +217,4 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             recyclerViewItem = itemView.findViewById(R.id.recyclerViewItem);
         }
     }
-
 }

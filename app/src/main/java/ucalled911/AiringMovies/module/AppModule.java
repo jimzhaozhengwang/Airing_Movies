@@ -1,4 +1,4 @@
-package com.codepath.android.codepathandroidflicks.module;
+package ucalled911.AiringMovies.module;
 
 import android.app.Application;
 
@@ -11,13 +11,13 @@ import dagger.Provides;
 public class AppModule {
     Application application;
 
-    public AppModule(Application application){
+    public AppModule(Application application) {
         this.application = application;
     }
 
     @Provides
     @Singleton
-    Application provideApplication(){
+    Application provideApplication() {
         return application;
     }
 

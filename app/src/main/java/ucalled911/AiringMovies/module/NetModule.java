@@ -1,4 +1,4 @@
-package com.codepath.android.codepathandroidflicks.module;
+package ucalled911.AiringMovies.module;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,13 +14,13 @@ public class NetModule {
 
     @Provides
     @Singleton
-    OkHttpClient provideOKHttpClient(){
+    OkHttpClient provideOKHttpClient() {
         return new OkHttpClient();
     }
 
     @Provides
     @Singleton
-    Gson provideGson(){
+    Gson provideGson() {
         return new GsonBuilder().create();
     }
 

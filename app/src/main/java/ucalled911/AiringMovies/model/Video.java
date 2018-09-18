@@ -1,4 +1,4 @@
-package com.codepath.android.codepathandroidflicks.model;
+package ucalled911.AiringMovies.model;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -28,7 +28,7 @@ public class Video {
     @SerializedName("type")
     String type;
 
-    public Video (){
+    public Video() {
 
     }
 

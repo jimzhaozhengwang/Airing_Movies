@@ -1,4 +1,4 @@
-package com.codepath.android.codepathandroidflicks.model;
+package ucalled911.AiringMovies.model;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -45,7 +45,7 @@ public class Movie {
     @SerializedName("release_date")
     String releaseDate;
 
-    public Movie(){
+    public Movie() {
 
     }
 

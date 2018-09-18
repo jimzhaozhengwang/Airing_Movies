@@ -1,12 +1,9 @@
-package com.codepath.android.codepathandroidflicks.app;
+package ucalled911.AiringMovies.app;
 
 import android.os.Bundle;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.codepath.android.codepathandroidflicks.R;
-import com.codepath.android.codepathandroidflicks.model.Movie;
-import com.codepath.android.codepathandroidflicks.model.Video;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -29,9 +26,16 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import ucalled911.AiringMovies.R;
+import ucalled911.AiringMovies.model.Movie;
+import ucalled911.AiringMovies.model.Video;
 
 public class MovieDetailsActivity extends YouTubeBaseActivity {
 
+    @Inject
+    Gson mGson;
+    @Inject
+    OkHttpClient mOkHttpClient;
     private TextView mTitle;
     private TextView mReleaseDate;
     private RatingBar mRatingBar;
@@ -40,18 +44,13 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
     private YouTubePlayerView mYouTubePlayerView;
     private Movie mMovie;
 
-    @Inject
-    Gson mGson;
-
-    @Inject
-    OkHttpClient mOkHttpClient;
-
-    private void initializeYouTube(final String url){
+    private void initializeYouTube(final String url) {
         mYouTubePlayerView.initialize(getString(R.string.YouTube_API_key), new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 youTubePlayer.cueVideo(url);
             }
+
             @Override
             public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
 
@@ -106,10 +105,10 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
                                         Video[].class));
 
                                 // find the first valid trailer
-                                for (int c = 0; c < mVideoList.size(); c++){
+                                for (int c = 0; c < mVideoList.size(); c++) {
                                     final Video current = mVideoList.get(c);
                                     if (getString(R.string.YouTube).equals(current.getSite()) &&
-                                            getString(R.string.Trailer).equals(current.getType())){
+                                            getString(R.string.Trailer).equals(current.getType())) {
 
                                         initializeYouTube(current.getKey());
                                         break;
@@ -131,7 +130,7 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
         mReleaseDate.setText(mMovie.getReleaseDate());
 
         // vote_average has a maximum value of 10, the maximum number of stars is 5
-        mRatingBar.setRating((int) Math.round(mMovie.getVoteAverage()/2));
+        mRatingBar.setRating((int) Math.round(mMovie.getVoteAverage() / 2));
 
         mOverview.setText(mMovie.getOverview());
     }

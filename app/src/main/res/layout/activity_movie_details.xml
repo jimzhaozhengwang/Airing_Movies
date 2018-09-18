@@ -9,7 +9,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".app.MovieDetailsActivity">
+        tools:context="ucalled911.AiringMovies.app.MovieDetailsActivity">
 
         <com.google.android.youtube.player.YouTubePlayerView
             android:id="@+id/video"

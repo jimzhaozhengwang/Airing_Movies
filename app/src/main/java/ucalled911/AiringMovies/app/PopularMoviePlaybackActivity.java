@@ -1,19 +1,19 @@
-package com.codepath.android.codepathandroidflicks.app;
+package ucalled911.AiringMovies.app;
 
 import android.os.Bundle;
-
-import com.codepath.android.codepathandroidflicks.R;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
+import ucalled911.AiringMovies.R;
+
 public class PopularMoviePlaybackActivity extends YouTubeBaseActivity {
 
     private YouTubePlayerView mYouTubePlayerView;
 
-    private void initializeYouTube(final String url){
+    private void initializeYouTube(final String url) {
 
         mYouTubePlayerView.initialize(getString(R.string.YouTube_API_key), new YouTubePlayer.OnInitializedListener() {
             @Override
@@ -21,6 +21,7 @@ public class PopularMoviePlaybackActivity extends YouTubeBaseActivity {
                 youTubePlayer.cueVideo(url);
                 youTubePlayer.setFullscreen(true);
             }
+
             @Override
             public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
 

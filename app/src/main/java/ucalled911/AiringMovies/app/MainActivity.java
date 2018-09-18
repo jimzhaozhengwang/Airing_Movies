@@ -1,16 +1,12 @@
-package com.codepath.android.codepathandroidflicks.app;
+package ucalled911.AiringMovies.app;
 
+import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.codepath.android.codepathandroidflicks.R;
-import com.codepath.android.codepathandroidflicks.adapter.RecyclerViewAdapter;
-import com.codepath.android.codepathandroidflicks.model.Movie;
-import com.codepath.android.codepathandroidflicks.module.NetComponent;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -28,19 +24,20 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import ucalled911.AiringMovies.R;
+import ucalled911.AiringMovies.adapter.RecyclerViewAdapter;
+import ucalled911.AiringMovies.model.Movie;
 
 public class MainActivity extends AppCompatActivity {
 
+    @Inject
+    OkHttpClient mClient;
+    @Inject
+    Gson mGson;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private List<Movie> mMovieList;
-
-    @Inject
-    OkHttpClient mClient;
-
-    @Inject
-    Gson mGson;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.codepath.android.codepathandroidflicks">
+    package="ucalled911.AiringMovies">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.codepath.android.codepathandroidflicks.app.MyApp"
+        android:name="ucalled911.AiringMovies.app.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".app.MainActivity">
+        <activity android:name="ucalled911.AiringMovies.app.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,9 +20,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".app.MovieDetailsActivity"
+            android:name="ucalled911.AiringMovies.app.MovieDetailsActivity"
             android:configChanges="orientation|screenSize" />
-        <activity android:name=".app.PopularMoviePlaybackActivity"
+        <activity android:name="ucalled911.AiringMovies.app.PopularMoviePlaybackActivity"
             android:configChanges="orientation|screenSize" />
     </application>
 

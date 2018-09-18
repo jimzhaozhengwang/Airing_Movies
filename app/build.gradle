@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
-        applicationId "com.codepath.android.codepathandroidflicks"
+        applicationId "ucalled911.AiringMovies"
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
