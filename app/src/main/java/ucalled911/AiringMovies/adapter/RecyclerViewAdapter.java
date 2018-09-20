@@ -55,8 +55,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         Picasso.get()
                 .load(imagePath)
-                .placeholder(R.drawable.ic_file_download_black_200dp)
-                .error(R.drawable.ic_error_black_200dp)
+                .placeholder(R.drawable.ic_file_download_black_126dp_189dp)
+                .error(R.drawable.ic_error_black_126dp_189dp)
                 .into(viewHolder.image, new com.squareup.picasso.Callback() {
                     @Override
                     public void onSuccess() {

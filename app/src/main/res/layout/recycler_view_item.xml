@@ -11,7 +11,7 @@
         android:id="@+id/standard_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher" /> <!-- just a placeholder for xml preview -->
+        app:srcCompat="@drawable/ic_file_download_black_126dp_189dp" /> <!-- just a placeholder for xml preview -->
 
     <LinearLayout
         android:layout_width="wrap_content"
